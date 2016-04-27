@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.conf import settings
 from django.http import  HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login,logout
 #from .models import Greeting
@@ -33,13 +34,13 @@ def login_page(request):
     c = {}
     c.update(csrf(request))
     c['form'] = LoginForm()
-    return render(request, 'login.html',c)
+    return render(request, 'loginPage.html',c)
 
-def nextQuarter(request):
-    c = {}
-    c.update(csrf(request))
-    c['form'] = LoginForm()
-    return render(request, 'loginSecond.html',c)
+#def nextQuarter(request):
+#    c = {}
+#    c.update(csrf(request))
+#    c['form'] = LoginForm()
+#    return render(request, 'loginSecond.html',c)
 
 
 def invalid_login(request):
@@ -83,6 +84,26 @@ def auth_view(request):
         # Return an 'invalid login' error message.
 
 
+def currentPage(request):
+    if request.user.is_authenticated():
+            return render(request, 'calendar.html')
+            # Redirect to a success page.
+
+    else:
+        return HttpResponseRedirect('/account/invalid_login')
+        # Return an 'invalid login' error message.
+
+
+
+def nextPage(request):
+    if request.user.is_authenticated():
+            return render(request, 'calendarSecond.html')
+            # Redirect to a success page.
+
+    else:
+        return HttpResponseRedirect('/account/invalid_login')
+        # Return an 'invalid login' error message.
+'''
 def auth_viewSecond(request):
     username = request.POST['username']
     password = request.POST['password']
@@ -100,3 +121,4 @@ def auth_viewSecond(request):
     else:
         return HttpResponseRedirect('/account/invalid_login')
         # Return an 'invalid login' error message.
+'''

@@ -46,21 +46,35 @@
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li class="">
+
         {% if user.is_authenticated %} <!-- user is from request-->
-           <a href="/"><span class="glyphicon glyphicon-book"></span> logout</a>
+
+
+           <li class="">
+              <a href="/account/currrentPage"><span class="glyphicon glyphicon-book"></span> Current Quarter</a>
+           </li>
+           <li class="">
+              <a href="/account/nextPage"><span class="glyphicon glyphicon-book"></span> Next Quarter</a>
+           </li>
+           <li class="">
+              <a href="/"><span class="glyphicon glyphicon-book"></span> logout</a>
+           </li>
+
 
         {% else %}
-           <a href="/account/login"><span class="glyphicon glyphicon-book"></span> Current Quarter</a>
+           <li class="">
+               <a href="/account/login"><span class="glyphicon glyphicon-book"></span>Login</a>
+           </li>
         {% endif %}
 
-      </li>
+
+      <!--
       <li class="">
 
            <a href="/account/login2"><span class="glyphicon glyphicon-book"></span>Next Quarter</a>
 
 
-      </li>
+      </li> -->
     </ul>
   </div>
 </nav>
