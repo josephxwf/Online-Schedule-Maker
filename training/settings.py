@@ -1,5 +1,5 @@
 """
-Django settings for helloworld project on Heroku. Fore more info, see:
+Django settings for training project on Heroku. Fore more info, see:
 https://github.com/heroku/heroku-django-template
 
 For more information on this file, see
@@ -49,7 +49,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-ROOT_URLCONF = 'helloworld.urls'
+ROOT_URLCONF = 'training.urls'
 
 TEMPLATES = (
     {
@@ -68,7 +68,7 @@ TEMPLATES = (
     },
 )
 
-WSGI_APPLICATION = 'helloworld.wsgi.application'
+WSGI_APPLICATION = 'training.wsgi.application'
 
 
 # Database

@@ -4,7 +4,7 @@ import mtaapp.views
 admin.autodiscover()
 urlpatterns = [
     # Examples:
-    # url(r'^$', 'helloworld.views.home', name='home'),
+    # url(r'^$', 'training.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^$', mtaapp.views.index, name='index'),
