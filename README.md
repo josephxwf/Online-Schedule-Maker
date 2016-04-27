@@ -1,5 +1,5 @@
 # Online-Schedule-Maker
-##(This Project used Heroku Django Starter Template and Google sheet)
+
 This Online-Schedule-Maker allow employees and department manager to fill in and collect work schedules online for next quarter efficiently. I wrote three functions "Get Dates", "Get Summaries", "Clear Sheets" in javascript. "Get Dates" allows manger to get new dates for the next quarter. "Get Summaries" allows manger to get a list of each class's name and its corresponding date and total number of classes each instructor will deliver for the next quarter. "Clear Sheets" will clear the contents and sheets.
 ## How to Use
 
