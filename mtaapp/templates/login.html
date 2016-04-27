@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+   {% if form.errors %}
+    <p>Sorry,that's not a valid username or password</p>
+    {% endif %}
+
+<div style="text-align:center">
+    <form id="user_form" accept-charset="UTF-8" action="{% url 'mtaapp:auth' %}"  method="post">
+        {% csrf_token %}
+        {{form.as_p}}  <!--https://docs.djangoproject.com/en/1.9/topics/forms/-->
+        <input type = "submit" value = "login">
+      </form>
+</div>
+<p> </p>
+<p> </p>
+
+<p><strong>Note:</strong> If the IE on your computer is not up-to-date, please use Firefox or Chrome to login.</p>
+
+<p style = "margin-left: 40px;"> Please fill in your work schedule in the calendar in the format of "<strong>'Class Name', 'Category', 'Name Initial'</strong>" as shown below: </p>
+<p style = "margin-left: 40px;"> Or your class will not show in the summary sheet. Anything you type or change in the calendar will be saved automatically in the database.</p>
+{% load static %}
+<img style = "margin-left: 40px;" src="{% static "mtaapp/images/example.png" %}" width = "600px" alt="My image"/>
+{% endblock %}

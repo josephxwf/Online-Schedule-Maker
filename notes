@@ -1,0 +1,142 @@
+commands to create this project:
+
+cd MTA
+virtualenv env
+source env/bin/activate
+pip install django
+
+django-admin.py startproject --template=https://github.com/heroku/heroku-django-template/archive/master.zip --name=Procfile helloworld
+
+cd helloworld/
+python manage.py startapp mtaapp
+git add -A
+git commit -m "Initial commit"
+heroku login
+heroku create trainingnyct
+git push heroku master
+heroku run python manage.py makemigrations
+heroku run python manage.py migrate
+heroku run python manage.py createsuperuser
+heroku open
+
+more info:
+https://github.com/heroku/heroku-django-template
+=================================================================================
+
+three ways in url to connect to the same page:
+
+
+index.html:
+
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<!—-three ways to connect to the same page:—->
+
+<a href="{% url 'hello:calendars' %}">Calendar1</a>
+<a href="{% url 'test2' %}">Calendar2</a>
+<a href="/hello/calendar/">Calendar3</a>
+
+ {% load static %}
+<img src="{% static "images/training.jpg" %}" alt="My image"/>
+
+
+
+{% endblock %}
+====================================================================
+urls.py in hello folder:
+
+from django.conf.urls import patterns, include, url
+
+from . import views
+from django.contrib import admin
+
+
+admin.autodiscover()
+
+urlpatterns = patterns(
+    '',
+    url(r'^$', views.index),
+
+    url(r'^(?i)calendar/$', views.calendar,name='calendars'),
+
+
+)
+====================================================================
+urls.py in gettingstarted folder:
+
+from django.conf.urls import include, url
+
+from django.contrib import admin
+admin.autodiscover()
+
+import hello.views
+
+# Examples:
+# url(r'^$', 'gettingstarted.views.home', name='home'),
+# url(r'^blog/', include('blog.urls')),
+
+urlpatterns = [
+    url(r'^$', hello.views.index, name='index'),
+    url(r'^hello/', include('hello.urls', namespace="hello")),
+
+    #url(r'^hello/calendar/$', hello.views.calendar,name = "test2"),
+
+    url(r'^db', hello.views.db, name='db'),
+    url(r'^admin/', include(admin.site.urls)),
+
+]
+
+"""
+django gives you the option to name your views in case you need to refer to them from your code, or your templates. This is useful and good practice because you avoid hardcoding urls on your code or inside your templates. Even if you change the actual url, you don't have to change anything else, since you will refer to them by name.
+for example:
+
+in urls.py:
+urlpatterns = patterns(
+    '',
+    url(r'^$', views.index, name='index'),
+
+    url(r'^(?i)calendar/$', views.calendar, name='trainingCalendar'),
+
+)
+
+
+in views.py:
+
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
+
+def myview(request):
+    passwords_url = reverse('trainingCalendar')  # this returns the string `/calendar/`
+    return HttpResponseRedirect(passwords_url)
+More here.
+
+
+in templates:
+
+<p>Please go <a href="{% url 'hello:trainingCalendar' %}">here</a></p>
+"""
+==========================================================================
+
+$ and ^ are regular expression characters that have a special meaning: the caret means “require that the pattern matches the start of the string,” and the dollar sign means “require that the pattern matches the end of the string.”
+
+For example consider the  following url pattern
+
+
+urlpatterns = patterns('',
+    url(r'^hello/$', hello),
+)
+1
+2
+3
+urlpatterns = patterns('',
+    url(r'^hello/$', hello),
+)
+Without the dollar sign at the end it will match any url starting with hello like
+
+hello/satish
+hello/gandham/
+hello/satish/123/pqr
+Note: use url(r'^$', my_homepage_view), to match root.
